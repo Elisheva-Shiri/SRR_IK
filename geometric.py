@@ -268,11 +268,8 @@ def calculate_phi_6(x2, y2, x5, y5, xb, yb):
     except Exception as e:
         print(f"Error: {e}")
         return None, None, None
-
-# Example usage
-x2, y2 = 5, 5  # Coordinates of point 2
-x5, y5 = 8, 7  # Coordinates of point 5
-xb, yb = 6, 7  # Coordinates of point b
+    
+y5=yb
 
 d6, d7, phi_6 = calculate_phi_6(x2, y2, x5, y5, xb, yb)
 if phi_6 is not None:
@@ -318,5 +315,6 @@ try:
     print(f"Angle between arms (phi_9): {phi_9:.2f}°")
 except ValueError as e:
     print(f"Error calculating angle: {e}")
+
 
 
