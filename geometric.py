@@ -17,7 +17,7 @@ from datetime import datetime
 # Define known variables
 x1, y1, z1 = 1.0, 15.0, 8.0  # Example coordinates of the first point
 d1 = 1.0  # Distance from the first point to the second
-phi1 = 22.0  # Angle in degrees clockwise
+phi1 = 3.0  # Angle in degrees clockwise
 xb, yb, zb = 5.0, 8.0, 9.0  # Coordinates of the base point
 d3 = 8.0  # Example value for distance d3
 d4 = 1.0  # Example value for distance d4
@@ -316,5 +316,30 @@ try:
 except ValueError as e:
     print(f"Error calculating angle: {e}")
 
+# Save data to CSV
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+csv_file = "raw_data.csv"
+file_exists = os.path.isfile(csv_file)
 
+data = {
+    'Timestamp': timestamp,
+    'x1': x1, 'y1': y1, 'z1': z1,
+    'x2': x2, 'y2': y2, 'z2': z2,
+    'xb': xb, 'yb': yb, 'zb': zb,
+    'x4': x4, 'y4': y4, 'z4': z4,
+    'd1': d1, 'd2': d2, 'd3': d3, 'd4': d4,
+    'd5': d5_list[0] if d5_list else None,
+    'd6': d6, 'd7': d7, 'd8': d8,
+    'phi1': phi1, 'phi2': phi_2, 'phi3': phi_3,
+    'phi4': phi_4, 'phi5': phi_5, 'phi6': phi_6,
+    'phi7': phi_7, 'phi8': phi_8, 'phi9': phi_9
+}
+
+with open(csv_file, mode='a', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=data.keys())
+    if not file_exists:
+        writer.writeheader()
+    writer.writerow(data)
+
+print(f"\nData saved to {csv_file}")
 
